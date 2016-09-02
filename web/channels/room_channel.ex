@@ -35,7 +35,9 @@ defmodule MfaMockup.RoomChannel do
   end
 
   def handle_info(:ping, socket) do
-    push socket, "new:msg", %{user: "SYSTEM", body: "ping"}
+    push socket, "ping", %{user: "SYSTEM", body: "ping"}
+    IO.puts "Sending a ping..."
+    {:noreply, socket}
   end
   def handle_info(p, socket) do
     IO.puts """

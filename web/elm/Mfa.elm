@@ -44,13 +44,13 @@ type Msg
   | ShowJoinedMessage String
   | ShowLeftMessage String
   | NoOp
-  | Pong
+  | Ping JE.Value
 
 type alias Model =
-  Model2
   { newMessage : String
   , messages : List String
   , phxSocket : Phoenix.Socket.Socket Msg
+  , ping : Int
   }
 
 type alias Model2 =
@@ -62,12 +62,12 @@ initPhxSocket : Phoenix.Socket.Socket Msg
 initPhxSocket =
   Phoenix.Socket.init socketServer
     |> Phoenix.Socket.withDebug
-    |> Phoenix.Socket.on "new:msg" "rooms:lobby" ReceiveChatMessage
-    |> Phoenix.Socket.on "new:msg" "ping" Pong
+--    |> Phoenix.Socket.on "new:msg" "rooms:lobby" ReceiveChatMessage
+    |> Phoenix.Socket.on "ping" "rooms:lobby" Ping
 
 initModel : Model
 initModel =
-  Model "" [] initPhxSocket
+  Model "" [] initPhxSocket 0
 
 init : ( Model, Cmd Msg )
 init =
@@ -202,8 +202,8 @@ update msg model =
         , Cmd.none
         )
 
-    Pong ->
-        (model
+    Ping raw ->
+        ({ model |  ping = model.ping + 1 }
         , Cmd.none)
 
     NoOp ->
@@ -247,10 +247,9 @@ newview model =
               ]
         ] 
         [
-            text "Checkout"
+            text(toString model.ping)
         ]
     ]
-
 
 
 view : Model -> Html Msg
