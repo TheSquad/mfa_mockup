@@ -30,11 +30,17 @@ socketServer = "ws://localhost:5000/socket/websocket"
 
 -- MODEL
 
-type Msg
-  = Checkout
+type Status
+  = None
   | Accepted
   | Rejected
   | Timeout
+
+type Msg
+  = Checkout
+  | ReceiveAccepted JE.Value
+  | ReceiveRejected JE.Value
+  | ReceiveTimeout JE.Value
   | SendMessage
   | SetNewMessage String
   | PhoenixMsg (Phoenix.Socket.Msg Msg)
@@ -51,6 +57,7 @@ type alias Model =
   , messages : List String
   , phxSocket : Phoenix.Socket.Socket Msg
   , ping : Int
+  , status : Status
   }
 
 type alias Model2 =
@@ -64,10 +71,13 @@ initPhxSocket =
     |> Phoenix.Socket.withDebug
 --    |> Phoenix.Socket.on "new:msg" "rooms:lobby" ReceiveChatMessage
     |> Phoenix.Socket.on "ping" "rooms:lobby" Ping
+    |> Phoenix.Socket.on "accepted" "rooms:lobby" ReceiveAccepted
+    |> Phoenix.Socket.on "rejected" "rooms:lobby" ReceiveRejected
+    |> Phoenix.Socket.on "timeout" "rooms:lobby" ReceiveTimeout
 
 initModel : Model
 initModel =
-  Model "" [] initPhxSocket 0
+  Model "" [] initPhxSocket 0 None
 
 init : ( Model, Cmd Msg )
 init =
@@ -187,19 +197,19 @@ update msg model =
             }
             , Cmd.map PhoenixMsg phxCmd
             )
-    Accepted ->
-        (  model
-        ,  Cmd.none 
+    ReceiveAccepted raw ->
+        (  { model | status = Accepted }
+        ,  Cmd.none
         )
-       
-    Rejected ->
-        ( model
-        , Cmd.none
-        )    
 
-    Timeout ->
-        ( model
-        , Cmd.none
+    ReceiveRejected raw ->
+        (  { model | status = Rejected }
+        ,  Cmd.none
+        )
+
+    ReceiveTimeout raw ->
+        (  { model | status = Accepted }
+        ,  Cmd.none
         )
 
     Ping raw ->
@@ -213,8 +223,8 @@ update msg model =
 
 (=>) = (,)
 
-color : Msg -> String
-color msg = 
+color : Status -> String
+color msg =
     case msg of
         Accepted ->
             "#3C8D2F"
@@ -222,20 +232,23 @@ color msg =
         Rejected ->
             "#8D3C2F"
 
-        _ ->
+        Timeout ->
             "#DDDDDD"
 
+        _ ->
+            "#123456"
+
 newview : Model -> Html Msg
-newview model = 
+newview model =
     div []
-    [ button [ onClick JoinChannel ] [ text "Join channel" ] 
-    , button 
-        [ onClick Checkout,
+    [ button [ onClick JoinChannel ] [ text "Checkout" ]
+    , div
+        [
         style
-              [ "background-color" => color Timeout
+              [ "background-color" => color model.status
               , "cursor" => "move"
-              , "width" => "100px"
-              , "height" => "100px"
+              , "width" => "300px"
+              , "height" => "300px"
               , "border-radius" => "4px"
               , "position" => "absolute"
               , "left" => "center"
@@ -245,7 +258,7 @@ newview model =
               , "align-items" => "center"
               , "justify-content" => "center"
               ]
-        ] 
+        ]
         [
             text(toString model.ping)
         ]
