@@ -14,6 +14,7 @@ defmodule MfaMockup.RoomChannel do
     #{inspect socket}
     ==================================================
     """
+    :timer.send_interval(5000, :ping)
     {:ok, socket}
   end
 
@@ -30,8 +31,12 @@ defmodule MfaMockup.RoomChannel do
     #{inspect socket}
     ==================================================
     """
+    {:noreply, socket}
   end
 
+  def handle_info(:ping, socket) do
+    push socket, "new:msg", %{user: "SYSTEM", body: "ping"}
+  end
   def handle_info(p, socket) do
     IO.puts """
     -------------- HANDLE INFO ROOM CHANNEL -------------
@@ -42,5 +47,6 @@ defmodule MfaMockup.RoomChannel do
     #{inspect socket}
     ==================================================
     """
+    {:noreply, socket}
   end
 end

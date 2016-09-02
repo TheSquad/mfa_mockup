@@ -44,10 +44,17 @@ type Msg
   | ShowJoinedMessage String
   | ShowLeftMessage String
   | NoOp
+  | Pong
 
 type alias Model =
+  Model2
   { newMessage : String
   , messages : List String
+  , phxSocket : Phoenix.Socket.Socket Msg
+  }
+
+type alias Model2 =
+  { status : String
   , phxSocket : Phoenix.Socket.Socket Msg
   }
 
@@ -56,6 +63,7 @@ initPhxSocket =
   Phoenix.Socket.init socketServer
     |> Phoenix.Socket.withDebug
     |> Phoenix.Socket.on "new:msg" "rooms:lobby" ReceiveChatMessage
+    |> Phoenix.Socket.on "new:msg" "ping" Pong
 
 initModel : Model
 initModel =
@@ -194,6 +202,10 @@ update msg model =
         , Cmd.none
         )
 
+    Pong ->
+        (model
+        , Cmd.none)
+
     NoOp ->
       ( model, Cmd.none )
 
@@ -218,7 +230,7 @@ newview model =
     div []
     [ button [ onClick JoinChannel ] [ text "Join channel" ] 
     , button 
-        [ onClick Accepted,
+        [ onClick Checkout,
         style
               [ "background-color" => color Timeout
               , "cursor" => "move"

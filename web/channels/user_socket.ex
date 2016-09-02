@@ -19,21 +19,12 @@ defmodule MfaMockup.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
+
   def connect(params, socket) do
     IO.puts "-----------------"
     IO.inspect params
     # {:ok, socket}
     {:ok, assign(socket, :user, params["username"])}
-  end
-
-  def handle_in(p, msg, socket) do
-    IO.puts "----------------- Handle in ----------------------"
-    IO.inspect p
-    IO.puts "__________________________________________________"
-    IO.inspect msg
-    IO.puts "__________________________________________________"
-    IO.inspect socket
-    IO.puts "<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:

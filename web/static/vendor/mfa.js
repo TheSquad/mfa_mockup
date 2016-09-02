@@ -9869,6 +9869,7 @@ var _user$project$Mfa$view = function (model) {
 var _user$project$Mfa$Timeout = {ctor: 'Timeout'};
 var _user$project$Mfa$Rejected = {ctor: 'Rejected'};
 var _user$project$Mfa$Accepted = {ctor: 'Accepted'};
+var _user$project$Mfa$Checkout = {ctor: 'Checkout'};
 var _user$project$Mfa$newview = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -9890,7 +9891,7 @@ var _user$project$Mfa$newview = function (model) {
 				_elm_lang$html$Html$button,
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html_Events$onClick(_user$project$Mfa$Accepted),
+						_elm_lang$html$Html_Events$onClick(_user$project$Mfa$Checkout),
 						_elm_lang$html$Html_Attributes$style(
 						_elm_lang$core$Native_List.fromArray(
 							[
@@ -9921,7 +9922,6 @@ var _user$project$Mfa$main = {
 	main: _elm_lang$html$Html_App$program(
 		{init: _user$project$Mfa$init, update: _user$project$Mfa$update, view: _user$project$Mfa$newview, subscriptions: _user$project$Mfa$subscriptions})
 };
-var _user$project$Mfa$Checkout = {ctor: 'Checkout'};
 
 var Elm = {};
 Elm['Mfa'] = Elm['Mfa'] || {};
