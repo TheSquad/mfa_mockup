@@ -9,16 +9,16 @@
 
     <title>Hello SeatSaver!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
   </head>
 
   <body>
-    <div class="container">
-
-      <main role="main">
+    <!-- <div class="container"> -->
+    <!-- <main role="main"> -->
         <%= render @view_module, @view_template, assigns %>
-      </main>
+    <!-- </main> -->
 
-    </div> <!-- /container -->
+    <!-- </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

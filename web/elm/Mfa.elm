@@ -1,7 +1,7 @@
 module Mfa exposing (..)
 
 import Html exposing (..)
-import Html.Attributes exposing (type', value, style)
+import Html.Attributes as Attr exposing (type', value, style)
 import Html.Events exposing (onInput, onSubmit, onClick)
 import Html.App
 import Platform.Cmd
@@ -11,6 +11,9 @@ import Phoenix.Push
 import Json.Encode as JE
 import Json.Decode as JD exposing ((:=))
 import Dict
+import FontAwesome.Web as Icon
+import Bootstrap.Buttons as Btn exposing (..)
+import Bootstrap.Grid exposing (..)
 
 -- MAIN
 
@@ -32,6 +35,7 @@ socketServer = "ws://localhost:5000/socket/websocket"
 
 type Status
   = None
+  | Waiting
   | Accepted
   | Rejected
   | Timeout
@@ -69,8 +73,7 @@ initPhxSocket : Phoenix.Socket.Socket Msg
 initPhxSocket =
   Phoenix.Socket.init socketServer
     |> Phoenix.Socket.withDebug
---    |> Phoenix.Socket.on "new:msg" "rooms:lobby" ReceiveChatMessage
-    |> Phoenix.Socket.on "ping" "rooms:lobby" Ping
+    |> Phoenix.Socket.on "waiting" "rooms:lobby" Ping
     |> Phoenix.Socket.on "accepted" "rooms:lobby" ReceiveAccepted
     |> Phoenix.Socket.on "rejected" "rooms:lobby" ReceiveRejected
     |> Phoenix.Socket.on "timeout" "rooms:lobby" ReceiveTimeout
@@ -97,13 +100,15 @@ subscriptions model =
 type alias ChatMessage =
   { user : String
   , body : String
+  , value : Int
   }
 
 chatMessageDecoder : JD.Decoder ChatMessage
 chatMessageDecoder =
-  JD.object2 ChatMessage
+  JD.object3 ChatMessage
     ("user" := JD.string)
     ("body" := JD.string)
+    ("value" := JD.int)
 
 -- UPDATE
 
@@ -161,7 +166,7 @@ update msg model =
 
         (phxSocket, phxCmd) = Phoenix.Socket.join channel model.phxSocket
       in
-        ({ model | phxSocket = phxSocket }
+        ({ model | phxSocket = (Debug.log "phoenix socket on join" phxSocket) }
         , Cmd.map PhoenixMsg phxCmd
         )
 
@@ -208,13 +213,17 @@ update msg model =
         )
 
     ReceiveTimeout raw ->
-        (  { model | status = Accepted }
+        (  { model | status = Timeout }
         ,  Cmd.none
         )
 
     Ping raw ->
-        ({ model |  ping = model.ping + 1 }
+        case JD.decodeValue chatMessageDecoder raw of
+        Ok pm ->
+          ( { model | ping = pm.value, status = Waiting}
         , Cmd.none)
+        Err error ->
+          ( model, Cmd.none )
 
     NoOp ->
       ( model, Cmd.none )
@@ -227,43 +236,109 @@ color : Status -> String
 color msg =
     case msg of
         Accepted ->
-            "#3C8D2F"
+            Debug.log "color" "#3C8D2F"
 
         Rejected ->
-            "#8D3C2F"
+            Debug.log "color" "#8D3C2F"
 
         Timeout ->
-            "#DDDDDD"
+            Debug.log "color" "#DDDDDD"
 
-        _ ->
-            "#123456"
+        Waiting ->
+            Debug.log "color" "#123456"
+
+        None ->
+            Debug.log "color" "#FDF"
 
 newview : Model -> Html Msg
 newview model =
+    case model.status of
+        None ->
+            layout (page_checkout model)
+        Waiting ->
+            layout (page_waiting model)
+        Timeout ->
+            layout (page_retry model)
+        _ ->
+            div [] [
+
+                ]
+
+page_retry: Model -> Html Msg
+page_retry model =
+    div[][img [ Attr.src "http://www.theislandbath.com/assets/images/Icons/oops2.png" ][]
+         ,br [][]
+         ,br [][]
+         ,h3 [] [text "It seems that you didn't accept in time... should we retry ?"]
+         ,Btn.btn
+             BtnSuccess
+             [BtnBlock]
+             []
+             [] --onClick Retry
+             [
+              Html.i [ Attr.class "fa fa-shopping-cart fa-4x fa-fw" ][]
+             ]
+         ]
+
+layout: Html Msg -> Html Msg
+layout page =
+    containerFluid [
+         row [column [ExtraSmall Two, Small Two, Medium Two, Large Two]
+                  []
+             ,column [ExtraSmall Eight, Small Eight, Medium Eight, Large Eight]
+                 [ page ]
+             ,column [ExtraSmall Two, Small Two, Medium Two, Large Two]
+                 []
+             ]
+        ]
+
+page_checkout : Model -> Html Msg
+page_checkout model =
     div []
-    [ button [ onClick JoinChannel ] [ text "Checkout" ]
-    , div
-        [
-        style
+        [h2 [][ text "The total is of $ 42.0 " ]
+        ,Btn.btn
+            BtnPrimary
+            [BtnBlock]
+            []
+            [ onClick JoinChannel ]
+            [
+             Html.i [ Attr.class "fa fa-shopping-cart fa-4x fa-fw" ][]
+            ]
+        ]
+
+page_waiting: Model -> Html Msg
+page_waiting model =
+    div [] [
+         div [
+          style
               [ "background-color" => color model.status
-              , "cursor" => "move"
-              , "width" => "300px"
-              , "height" => "300px"
+              , "width" => "100%"
               , "border-radius" => "4px"
-              , "position" => "absolute"
               , "left" => "center"
               , "top" => "center"
               , "color" => "white"
-              , "display" => "flex"
-              , "align-items" => "center"
-              , "justify-content" => "center"
               ]
+         ]
+             [
+              div [] [
+                   h1 [ style ["align-items" => "center"] ] [text "Waiting for your acceptation..."]
+                  ]
+             ,div [
+                  style
+                      ["left" => "center"
+                      ,"align" => "center"
+                      , "justify-content" => "center"]
+                 ] [
+                   Html.i [ style ["align" => "center"], Attr.class "fa fa-spinner fa-spin fa-3x fa-fw" ] []
+                  ]
+             ]
+        , div [
+              style
+                  [ "top" => "bottom"
+                  , "color" => "#444" ]
+             ] [
+             ]
         ]
-        [
-            text(toString model.ping)
-        ]
-    ]
-
 
 view : Model -> Html Msg
 view model =

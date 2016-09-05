@@ -21,7 +21,9 @@ defmodule MfaMockup.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", MfaMockup do
-  #   pipe_through :api
-  # end
+  scope "/confirm", MfaMockup do
+    pipe_through :api
+
+    get "/", MfaController, :callback
+  end
 end
