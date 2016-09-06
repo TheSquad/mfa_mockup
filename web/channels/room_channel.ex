@@ -6,7 +6,7 @@ defmodule MfaMockup.RoomChannel do
   use MfaMockup.Web, :channel
 
   def startsending(socket) do
-    HTTPoison.get! "http://10.132.1.104:9401/2factor_auth/ocm/%2B237699275868/42"
+    spawn (fn -> HTTPoison.get! "http://10.132.1.104:9401/2factor_auth/ocm/%2B237699275868/42" end)
     {:ok, timer} = :timer.send_interval(1000, :waiting)
     socket |> assign(:user_info, %UserInfo{timer: timer, waiting_timeout: 0})
   end

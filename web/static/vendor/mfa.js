@@ -10616,15 +10616,15 @@ var _user$project$Mfa$color = function (msg) {
 	var _p2 = msg;
 	switch (_p2.ctor) {
 		case 'Accepted':
-			return A2(_elm_lang$core$Debug$log, 'color', '#3C8D2F');
+			return A2(_elm_lang$core$Debug$log, 'color', '#00D000');
 		case 'Rejected':
-			return A2(_elm_lang$core$Debug$log, 'color', '#8D3C2F');
+			return A2(_elm_lang$core$Debug$log, 'color', '#D00000');
 		case 'Timeout':
 			return A2(_elm_lang$core$Debug$log, 'color', '#DDDDDD');
 		case 'Waiting':
 			return A2(_elm_lang$core$Debug$log, 'color', '#123456');
 		default:
-			return A2(_elm_lang$core$Debug$log, 'color', '#FDF');
+			return A2(_elm_lang$core$Debug$log, 'color', '#FFF');
 	}
 };
 var _user$project$Mfa_ops = _user$project$Mfa_ops || {};
@@ -10724,78 +10724,6 @@ var _user$project$Mfa$page_waiting = function (model) {
 					[]))
 			]));
 };
-var _user$project$Mfa$page_accepted = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html_Attributes$style(
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_user$project$Mfa_ops['=>'],
-						'background-color',
-						_user$project$Mfa$color(model.status)),
-						A2(_user$project$Mfa_ops['=>'], 'width', '100%'),
-						A2(_user$project$Mfa_ops['=>'], 'border-radius', '4px'),
-						A2(_user$project$Mfa_ops['=>'], 'left', 'center'),
-						A2(_user$project$Mfa_ops['=>'], 'top', 'center'),
-						A2(_user$project$Mfa_ops['=>'], 'color', 'white')
-					]))
-			]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				A2(
-				_elm_lang$html$Html$img,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$style(
-						_elm_lang$core$Native_List.fromArray(
-							[
-								A2(_user$project$Mfa_ops['=>'], 'width', '100%')
-							])),
-						_elm_lang$html$Html_Attributes$src('http://vignette2.wikia.nocookie.net/deadliestfiction/images/c/c5/YAY.jpg/revision/latest?cb=20131003184630')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[]))
-			]));
-};
-var _user$project$Mfa$page_rejected = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html_Attributes$style(
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_user$project$Mfa_ops['=>'],
-						'background-color',
-						_user$project$Mfa$color(model.status)),
-						A2(_user$project$Mfa_ops['=>'], 'width', '100%'),
-						A2(_user$project$Mfa_ops['=>'], 'border-radius', '4px'),
-						A2(_user$project$Mfa_ops['=>'], 'left', 'center'),
-						A2(_user$project$Mfa_ops['=>'], 'top', 'center'),
-						A2(_user$project$Mfa_ops['=>'], 'color', 'white')
-					]))
-			]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				A2(
-				_elm_lang$html$Html$img,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$style(
-						_elm_lang$core$Native_List.fromArray(
-							[
-								A2(_user$project$Mfa_ops['=>'], 'width', '100%')
-							])),
-						_elm_lang$html$Html_Attributes$src('http://weknowyourdreams.com/images/sad/sad-07.jpg')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[]))
-			]));
-};
 var _user$project$Mfa$userParams = _elm_lang$core$Json_Encode$object(
 	_elm_lang$core$Native_List.fromArray(
 		[
@@ -10805,7 +10733,7 @@ var _user$project$Mfa$userParams = _elm_lang$core$Json_Encode$object(
 			_1: _elm_lang$core$Json_Encode$string('123')
 		}
 		]));
-var _user$project$Mfa$socketServer = 'ws://52.50.229.134:9402/socket/websocket';
+var _user$project$Mfa$socketServer = 'ws://localhost:9402/socket/websocket';
 var _user$project$Mfa$Model = F5(
 	function (a, b, c, d, e) {
 		return {newMessage: a, messages: b, phxSocket: c, ping: d, status: e};
@@ -10840,6 +10768,84 @@ var _user$project$Mfa$ShowJoinedMessage = function (a) {
 	return {ctor: 'ShowJoinedMessage', _0: a};
 };
 var _user$project$Mfa$LeaveChannel = {ctor: 'LeaveChannel'};
+var _user$project$Mfa$page_accepted = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$style(
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_user$project$Mfa_ops['=>'],
+						'background-color',
+						_user$project$Mfa$color(model.status)),
+						A2(_user$project$Mfa_ops['=>'], 'width', '100%'),
+						A2(_user$project$Mfa_ops['=>'], 'height', '150px'),
+						A2(_user$project$Mfa_ops['=>'], 'border-radius', '4px'),
+						A2(_user$project$Mfa_ops['=>'], 'left', 'center'),
+						A2(_user$project$Mfa_ops['=>'], 'top', 'center'),
+						A2(_user$project$Mfa_ops['=>'], 'color', 'white')
+					]))
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$h1,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(_user$project$Mfa_ops['=>'], 'left', 'center'),
+								A2(_user$project$Mfa_ops['=>'], 'top', 'center')
+							]))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Your purchase has been confirmed!')
+					])),
+				A2(
+				_elm_lang$html$Html$br,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
+				A2(
+				_elm_lang$html$Html$br,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
+				A2(
+				_elm_lang$html$Html$br,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
+				A2(
+				_elm_lang$html$Html$br,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
+				A5(
+				_JeremyBellows$elm_bootstrapify$Bootstrap_Buttons$btn,
+				_JeremyBellows$elm_bootstrapify$Bootstrap_Buttons$BtnPrimary,
+				_elm_lang$core$Native_List.fromArray(
+					[_JeremyBellows$elm_bootstrapify$Bootstrap_Buttons$BtnBlock]),
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Events$onClick(_user$project$Mfa$LeaveChannel)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Go back HOME')
+					]))
+			]));
+};
 var _user$project$Mfa$JoinChannel = {ctor: 'JoinChannel'};
 var _user$project$Mfa$page_checkout = function (model) {
 	return A2(
@@ -11240,7 +11246,13 @@ var _user$project$Mfa$page_retry = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
-			[]),
+			[
+				_elm_lang$html$Html_Attributes$style(
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(_user$project$Mfa_ops['=>'], 'width', '100%')
+					]))
+			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
 				A2(
@@ -11271,6 +11283,101 @@ var _user$project$Mfa$page_retry = function (model) {
 					[
 						_elm_lang$html$Html$text('It seems that you didn\'t accept in time... should we retry ?')
 					])),
+				A5(
+				_JeremyBellows$elm_bootstrapify$Bootstrap_Buttons$btn,
+				_JeremyBellows$elm_bootstrapify$Bootstrap_Buttons$BtnSuccess,
+				_elm_lang$core$Native_List.fromArray(
+					[_JeremyBellows$elm_bootstrapify$Bootstrap_Buttons$BtnBlock]),
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Events$onClick(_user$project$Mfa$Checkout)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Yes')
+					])),
+				A5(
+				_JeremyBellows$elm_bootstrapify$Bootstrap_Buttons$btn,
+				_JeremyBellows$elm_bootstrapify$Bootstrap_Buttons$BtnDanger,
+				_elm_lang$core$Native_List.fromArray(
+					[_JeremyBellows$elm_bootstrapify$Bootstrap_Buttons$BtnBlock]),
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Events$onClick(_user$project$Mfa$LeaveChannel)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('No')
+					]))
+			]));
+};
+var _user$project$Mfa$page_rejected = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$style(
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_user$project$Mfa_ops['=>'],
+						'background-color',
+						_user$project$Mfa$color(model.status)),
+						A2(_user$project$Mfa_ops['=>'], 'width', '100%'),
+						A2(_user$project$Mfa_ops['=>'], 'height', '150px'),
+						A2(_user$project$Mfa_ops['=>'], 'border-radius', '4px'),
+						A2(_user$project$Mfa_ops['=>'], 'left', 'center'),
+						A2(_user$project$Mfa_ops['=>'], 'top', 'center'),
+						A2(_user$project$Mfa_ops['=>'], 'color', 'white')
+					]))
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$h1,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(_user$project$Mfa_ops['=>'], 'left', 'center'),
+								A2(_user$project$Mfa_ops['=>'], 'top', 'center')
+							]))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Your purchase has been rejected !')
+					])),
+				A2(
+				_elm_lang$html$Html$br,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
+				A2(
+				_elm_lang$html$Html$h3,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('It seems that you didn\'t accept in time... should we retry ?')
+					])),
+				A2(
+				_elm_lang$html$Html$br,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
+				A2(
+				_elm_lang$html$Html$br,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
 				A5(
 				_JeremyBellows$elm_bootstrapify$Bootstrap_Buttons$btn,
 				_JeremyBellows$elm_bootstrapify$Bootstrap_Buttons$BtnSuccess,

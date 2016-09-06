@@ -29,7 +29,8 @@ main =
 -- CONSTANTS
 
 socketServer : String
-socketServer = "ws://52.50.229.134:9402/socket/websocket"
+--socketServer = "ws://52.50.229.134:9402/socket/websocket"
+socketServer = "ws://localhost:9402/socket/websocket"
 
 -- MODEL
 
@@ -237,10 +238,10 @@ color : Status -> String
 color msg =
     case msg of
         Accepted ->
-            Debug.log "color" "#3C8D2F"
+            Debug.log "color" "#00D000"
 
         Rejected ->
-            Debug.log "color" "#8D3C2F"
+            Debug.log "color" "#D00000"
 
         Timeout ->
             Debug.log "color" "#DDDDDD"
@@ -249,7 +250,7 @@ color msg =
             Debug.log "color" "#123456"
 
         None ->
-            Debug.log "color" "#FDF"
+            Debug.log "color" "#FFF"
 
 newview : Model -> Html Msg
 newview model =
@@ -267,7 +268,7 @@ newview model =
 
 page_retry: Model -> Html Msg
 page_retry model =
-    div[][img [ Attr.src "http://www.theislandbath.com/assets/images/Icons/oops2.png" ][]
+    div[ style ["width" => "100%"] ][img [ Attr.src "http://www.theislandbath.com/assets/images/Icons/oops2.png" ][]
          ,br [][]
          ,br [][]
          ,h3 [] [text "It seems that you didn't accept in time... should we retry ?"]
@@ -355,12 +356,28 @@ page_accepted model =
      style
          [ "background-color" => color model.status
          , "width" => "100%"
+         , "height" => "150px"
          , "border-radius" => "4px"
          , "left" => "center"
          , "top" => "center"
          , "color" => "white"
          ]
-    ][img [style ["width" => "100%"], Attr.src "http://vignette2.wikia.nocookie.net/deadliestfiction/images/c/c5/YAY.jpg/revision/latest?cb=20131003184630"][]]
+    ][h1[style ["left" => "center"
+               ,"top" => "center"]
+        ][ text "Your purchase has been confirmed!" ]
+     ,br [][]
+     ,br [][]
+     ,br [][]
+     ,br [][]
+     ,Btn.btn
+         BtnPrimary
+         [BtnBlock]
+         []
+         [ onClick LeaveChannel ] --onClick Retry
+         [
+          text "Go back HOME"
+         ]
+     ]
 
 page_rejected: Model -> Html Msg
 page_rejected model =
@@ -368,12 +385,36 @@ page_rejected model =
      style
          [ "background-color" => color model.status
          , "width" => "100%"
+         , "height" => "150px"
          , "border-radius" => "4px"
          , "left" => "center"
          , "top" => "center"
          , "color" => "white"
          ]
-    ][img [style ["width" => "100%"], Attr.src "http://weknowyourdreams.com/images/sad/sad-07.jpg"][]]
+    ][h1[style ["left" => "center"
+               ,"top" => "center"]
+        ][ text "Your purchase has been rejected !" ]
+     ,br [][]
+     ,h3 [] [text "It seems that you didn't accept in time... should we retry ?"]
+     ,br [][]
+     ,br [][]
+     ,Btn.btn
+         BtnSuccess
+         [BtnBlock]
+         []
+         [ onClick Checkout ] --onClick Retry
+         [
+          text "Yes"
+         ]
+     ,Btn.btn
+         BtnDanger
+         [BtnBlock]
+         []
+         [ onClick LeaveChannel ] --onClick Retry
+         [
+          text "No"
+         ]
+     ]
 
 view : Model -> Html Msg
 view model =
