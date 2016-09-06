@@ -29,7 +29,7 @@ main =
 -- CONSTANTS
 
 socketServer : String
-socketServer = "ws://localhost:5000/socket/websocket"
+socketServer = "ws://localhost:9402/socket/websocket"
 
 -- MODEL
 

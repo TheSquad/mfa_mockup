@@ -11994,7 +11994,7 @@ var _user$project$Mfa$userParams = _elm_lang$core$Json_Encode$object(
 			_1: _elm_lang$core$Json_Encode$string('123')
 		}
 		]));
-var _user$project$Mfa$socketServer = 'ws://localhost:5000/socket/websocket';
+var _user$project$Mfa$socketServer = 'ws://localhost:9402/socket/websocket';
 var _user$project$Mfa$Model = F5(
 	function (a, b, c, d, e) {
 		return {newMessage: a, messages: b, phxSocket: c, ping: d, status: e};
