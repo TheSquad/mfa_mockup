@@ -10,7 +10,12 @@ defmodule MfaMockup.Router do
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug :copy_req_body
+    plug :accepts, ["text"]
+  end
+
+  defp copy_req_body(conn, _) do
+    Plug.Conn.put_private(conn, :my_app_body, Plug.Conn.read_body(conn))
   end
 
   scope "/", MfaMockup do
@@ -24,6 +29,6 @@ defmodule MfaMockup.Router do
   scope "/confirm", MfaMockup do
     pipe_through :api
 
-    get "/", MfaController, :callback
+    post "/", MfaController, :callback
   end
 end

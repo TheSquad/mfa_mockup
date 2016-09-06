@@ -1,6 +1,8 @@
 defmodule MfaMockup.Endpoint do
   use Phoenix.Endpoint, otp_app: :mfa_mockup
 
+  :pg2.create :mfa_callback
+
   socket "/socket", MfaMockup.UserSocket
 
  # Serve at "/" the static files from "priv/static" directory.

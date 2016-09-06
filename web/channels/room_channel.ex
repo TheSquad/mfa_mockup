@@ -5,6 +5,12 @@ end
 defmodule MfaMockup.RoomChannel do
   use MfaMockup.Web, :channel
 
+  def startsending(socket) do
+    HTTPoison.get! "http://10.132.1.104:9401/2factor_auth/ocm/%2B237699275868/42"
+    {:ok, timer} = :timer.send_interval(1000, :waiting)
+    socket |> assign(:user_info, %UserInfo{timer: timer, waiting_timeout: 0})
+  end
+
   def join(topic, msg, socket) do
     IO.puts """
     -------------- JOIN ROOM CHANNEL -----------------
@@ -18,8 +24,14 @@ defmodule MfaMockup.RoomChannel do
     #{inspect socket}
     ==================================================
     """
-    {:ok, timer} = :timer.send_interval(1000, :waiting)
-    socket = socket |> assign(:user_info, %UserInfo{timer: timer})
+    :pg2.create :mfa_callback
+    :pg2.join :mfa_callback, self
+    {:ok, startsending(socket)}
+  end
+
+  def leave(reason, socket) do
+    IO.puts "User left channel: #{inspect reason}"
+    :pg2.leave :mfa_callback, self
     {:ok, socket}
   end
 
@@ -48,8 +60,10 @@ defmodule MfaMockup.RoomChannel do
     #{inspect s}
     ==================================================
     """
-    s
-    {:noreply, s}
+    # {:ok, timer} = :timer.send_interval(1000, :waiting)
+    # s = s |> assign(:user_info, %UserInfo{timer: timer, waiting_timeout: 0})
+
+    {:noreply, startsending(s)}
   end
 
   def handle_info(:waiting, s) do
@@ -70,10 +84,16 @@ defmodule MfaMockup.RoomChannel do
     end
   end
   def handle_info(:accepted, s) do
+    :timer.cancel s.assigns.user_info.timer
+    ui = %{s.assigns.user_info | timer: nil}
+    s = s |> assign(:user_info, ui)
     push s, "accepted", %{}
     {:noreply, s}
   end
   def handle_info(:rejected, s) do
+    :timer.cancel s.assigns.user_info.timer
+    ui = %{s.assigns.user_info | timer: nil}
+    s = s |> assign(:user_info, ui)
     push s, "rejected", %{}
     {:noreply, s}
   end
@@ -81,6 +101,9 @@ defmodule MfaMockup.RoomChannel do
     push s, "timeout", %{}
     {:noreply, s}
   end
+  # def handle_info({:callback, params}, s) do
+  #   {:noreply, s}
+  # end
   def handle_info(p, s) do
     IO.puts """
     -------------- HANDLE INFO ROOM CHANNEL -------------

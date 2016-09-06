@@ -174,7 +174,7 @@ update msg model =
       let
         (phxSocket, phxCmd) = Phoenix.Socket.leave "rooms:lobby" model.phxSocket
       in
-        ({ model | phxSocket = phxSocket }
+        ({ model | phxSocket = phxSocket, status = None, ping = 0}
         , Cmd.map PhoenixMsg phxCmd
         )
 
@@ -199,6 +199,7 @@ update msg model =
             ( { model
                 | newMessage = ""
                 , phxSocket = phxSocket
+                , ping = 0
             }
             , Cmd.map PhoenixMsg phxCmd
             )
@@ -226,7 +227,7 @@ update msg model =
           ( model, Cmd.none )
 
     NoOp ->
-      ( model, Cmd.none )
+      ( { model | ping = 0, status = None}, Cmd.none )
 
 -- VIEW
 
@@ -257,12 +258,12 @@ newview model =
             layout (page_checkout model)
         Waiting ->
             layout (page_waiting model)
+        Accepted ->
+            layout (page_accepted model)
+        Rejected ->
+            layout (page_rejected model)
         Timeout ->
             layout (page_retry model)
-        _ ->
-            div [] [
-
-                ]
 
 page_retry: Model -> Html Msg
 page_retry model =
@@ -274,9 +275,17 @@ page_retry model =
              BtnSuccess
              [BtnBlock]
              []
-             [] --onClick Retry
+             [ onClick Checkout ] --onClick Retry
              [
-              Html.i [ Attr.class "fa fa-shopping-cart fa-4x fa-fw" ][]
+              text "Yes"
+             ]
+         ,Btn.btn
+             BtnDanger
+             [BtnBlock]
+             []
+             [ onClick LeaveChannel ] --onClick Retry
+             [
+              text "No"
              ]
          ]
 
@@ -339,6 +348,32 @@ page_waiting model =
              ] [
              ]
         ]
+
+page_accepted: Model -> Html Msg
+page_accepted model =
+    div [
+     style
+         [ "background-color" => color model.status
+         , "width" => "100%"
+         , "border-radius" => "4px"
+         , "left" => "center"
+         , "top" => "center"
+         , "color" => "white"
+         ]
+    ][img [style ["width" => "100%"], Attr.src "http://vignette2.wikia.nocookie.net/deadliestfiction/images/c/c5/YAY.jpg/revision/latest?cb=20131003184630"][]]
+
+page_rejected: Model -> Html Msg
+page_rejected model =
+    div [
+     style
+         [ "background-color" => color model.status
+         , "width" => "100%"
+         , "border-radius" => "4px"
+         , "left" => "center"
+         , "top" => "center"
+         , "color" => "white"
+         ]
+    ][img [style ["width" => "100%"], Attr.src "http://weknowyourdreams.com/images/sad/sad-07.jpg"][]]
 
 view : Model -> Html Msg
 view model =

@@ -8671,134 +8671,6 @@ var _JeremyBellows$elm_bootstrapify$Bootstrap_Buttons$BtnCollapse = function (a)
 	return {ctor: 'BtnCollapse', _0: a};
 };
 
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$column = F2(
-	function (columns, htmlList) {
-		var flattenColumnList = F2(
-			function (columnOne, columnTwo) {
-				return A2(
-					_elm_lang$core$Basics_ops['++'],
-					columnOne,
-					A2(_elm_lang$core$Basics_ops['++'], ' ', columnTwo));
-			});
-		var getColumnSizeString = function (columnSize) {
-			var _p0 = columnSize;
-			switch (_p0.ctor) {
-				case 'One':
-					return '1';
-				case 'Two':
-					return '2';
-				case 'Three':
-					return '3';
-				case 'Four':
-					return '4';
-				case 'Five':
-					return '5';
-				case 'Six':
-					return '6';
-				case 'Seven':
-					return '7';
-				case 'Eight':
-					return '8';
-				case 'Nine':
-					return '9';
-				case 'Ten':
-					return '10';
-				case 'Eleven':
-					return '11';
-				default:
-					return '12';
-			}
-		};
-		var getColumnString = function (columnType) {
-			var _p1 = columnType;
-			switch (_p1.ctor) {
-				case 'ExtraSmall':
-					return A2(
-						_elm_lang$core$Basics_ops['++'],
-						'col-xs-',
-						getColumnSizeString(_p1._0));
-				case 'Small':
-					return A2(
-						_elm_lang$core$Basics_ops['++'],
-						'col-sm-',
-						getColumnSizeString(_p1._0));
-				case 'Medium':
-					return A2(
-						_elm_lang$core$Basics_ops['++'],
-						'col-md-',
-						getColumnSizeString(_p1._0));
-				default:
-					return A2(
-						_elm_lang$core$Basics_ops['++'],
-						'col-lg-',
-						getColumnSizeString(_p1._0));
-			}
-		};
-		var columnClasses = A3(
-			_elm_lang$core$List$foldr,
-			flattenColumnList,
-			'',
-			A2(_elm_lang$core$List$map, getColumnString, columns));
-		return A2(
-			_elm_lang$html$Html$div,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html_Attributes$class(columnClasses)
-				]),
-			htmlList);
-	});
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$row = function (htmlList) {
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html_Attributes$class('row')
-			]),
-		htmlList);
-};
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$container = function (htmlList) {
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html_Attributes$class('container')
-			]),
-		htmlList);
-};
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$containerFluid = function (htmlList) {
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html_Attributes$class('container-fluid')
-			]),
-		htmlList);
-};
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Twelve = {ctor: 'Twelve'};
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Eleven = {ctor: 'Eleven'};
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Ten = {ctor: 'Ten'};
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Nine = {ctor: 'Nine'};
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Eight = {ctor: 'Eight'};
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Seven = {ctor: 'Seven'};
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Six = {ctor: 'Six'};
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Five = {ctor: 'Five'};
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Four = {ctor: 'Four'};
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Three = {ctor: 'Three'};
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Two = {ctor: 'Two'};
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$One = {ctor: 'One'};
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Large = function (a) {
-	return {ctor: 'Large', _0: a};
-};
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Medium = function (a) {
-	return {ctor: 'Medium', _0: a};
-};
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Small = function (a) {
-	return {ctor: 'Small', _0: a};
-};
-var _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$ExtraSmall = function (a) {
-	return {ctor: 'ExtraSmall', _0: a};
-};
-
 var _elm_lang$core$Task$onError = _elm_lang$core$Native_Scheduler.onError;
 var _elm_lang$core$Task$andThen = _elm_lang$core$Native_Scheduler.andThen;
 var _elm_lang$core$Task$spawnCmd = F2(
@@ -10569,49 +10441,6 @@ var _user$project$Mfa$channelsTable = function (channels) {
 				A2(_elm_lang$core$List$map, _user$project$Mfa$channelRow, channels))
 			]));
 };
-var _user$project$Mfa$layout = function (page) {
-	return _JeremyBellows$elm_bootstrapify$Bootstrap_Grid$containerFluid(
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$row(
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$column,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$ExtraSmall(_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Two),
-								_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Small(_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Two),
-								_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Medium(_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Two),
-								_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Large(_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Two)
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[])),
-						A2(
-						_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$column,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$ExtraSmall(_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Eight),
-								_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Small(_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Eight),
-								_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Medium(_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Eight),
-								_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Large(_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Eight)
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[page])),
-						A2(
-						_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$column,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$ExtraSmall(_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Two),
-								_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Small(_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Two),
-								_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Medium(_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Two),
-								_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Large(_JeremyBellows$elm_bootstrapify$Bootstrap_Grid$Two)
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[]))
-					]))
-			]));
-};
 var _user$project$Mfa$color = function (msg) {
 	var _p2 = msg;
 	switch (_p2.ctor) {
@@ -10650,11 +10479,16 @@ var _user$project$Mfa$page_waiting = function (model) {
 								_user$project$Mfa_ops['=>'],
 								'background-color',
 								_user$project$Mfa$color(model.status)),
-								A2(_user$project$Mfa_ops['=>'], 'width', '100%'),
+								A2(_user$project$Mfa_ops['=>'], 'width', '600px'),
+								A2(_user$project$Mfa_ops['=>'], 'height', '600px'),
 								A2(_user$project$Mfa_ops['=>'], 'border-radius', '4px'),
+								A2(_user$project$Mfa_ops['=>'], 'position', 'absolute'),
 								A2(_user$project$Mfa_ops['=>'], 'left', 'center'),
 								A2(_user$project$Mfa_ops['=>'], 'top', 'center'),
-								A2(_user$project$Mfa_ops['=>'], 'color', 'white')
+								A2(_user$project$Mfa_ops['=>'], 'color', 'white'),
+								A2(_user$project$Mfa_ops['=>'], 'display', 'flex'),
+								A2(_user$project$Mfa_ops['=>'], 'align-items', 'center'),
+								A2(_user$project$Mfa_ops['=>'], 'justify-content', 'center')
 							]))
 					]),
 				_elm_lang$core$Native_List.fromArray(
@@ -10668,13 +10502,7 @@ var _user$project$Mfa$page_waiting = function (model) {
 								A2(
 								_elm_lang$html$Html$h1,
 								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html_Attributes$style(
-										_elm_lang$core$Native_List.fromArray(
-											[
-												A2(_user$project$Mfa_ops['=>'], 'align-items', 'center')
-											]))
-									]),
+									[]),
 								_elm_lang$core$Native_List.fromArray(
 									[
 										_elm_lang$html$Html$text('Waiting for your acceptation...')
@@ -10683,26 +10511,13 @@ var _user$project$Mfa$page_waiting = function (model) {
 						A2(
 						_elm_lang$html$Html$div,
 						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$style(
-								_elm_lang$core$Native_List.fromArray(
-									[
-										A2(_user$project$Mfa_ops['=>'], 'left', 'center'),
-										A2(_user$project$Mfa_ops['=>'], 'align', 'center'),
-										A2(_user$project$Mfa_ops['=>'], 'justify-content', 'center')
-									]))
-							]),
+							[]),
 						_elm_lang$core$Native_List.fromArray(
 							[
 								A2(
 								_elm_lang$html$Html$i,
 								_elm_lang$core$Native_List.fromArray(
 									[
-										_elm_lang$html$Html_Attributes$style(
-										_elm_lang$core$Native_List.fromArray(
-											[
-												A2(_user$project$Mfa_ops['=>'], 'align', 'center')
-											])),
 										_elm_lang$html$Html_Attributes$class('fa fa-spinner fa-spin fa-3x fa-fw')
 									]),
 								_elm_lang$core$Native_List.fromArray(
@@ -10719,78 +10534,6 @@ var _user$project$Mfa$page_waiting = function (model) {
 								A2(_user$project$Mfa_ops['=>'], 'top', 'bottom'),
 								A2(_user$project$Mfa_ops['=>'], 'color', '#444')
 							]))
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[]))
-			]));
-};
-var _user$project$Mfa$page_accepted = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html_Attributes$style(
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_user$project$Mfa_ops['=>'],
-						'background-color',
-						_user$project$Mfa$color(model.status)),
-						A2(_user$project$Mfa_ops['=>'], 'width', '100%'),
-						A2(_user$project$Mfa_ops['=>'], 'border-radius', '4px'),
-						A2(_user$project$Mfa_ops['=>'], 'left', 'center'),
-						A2(_user$project$Mfa_ops['=>'], 'top', 'center'),
-						A2(_user$project$Mfa_ops['=>'], 'color', 'white')
-					]))
-			]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				A2(
-				_elm_lang$html$Html$img,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$style(
-						_elm_lang$core$Native_List.fromArray(
-							[
-								A2(_user$project$Mfa_ops['=>'], 'width', '100%')
-							])),
-						_elm_lang$html$Html_Attributes$src('http://vignette2.wikia.nocookie.net/deadliestfiction/images/c/c5/YAY.jpg/revision/latest?cb=20131003184630')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[]))
-			]));
-};
-var _user$project$Mfa$page_rejected = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html_Attributes$style(
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_user$project$Mfa_ops['=>'],
-						'background-color',
-						_user$project$Mfa$color(model.status)),
-						A2(_user$project$Mfa_ops['=>'], 'width', '100%'),
-						A2(_user$project$Mfa_ops['=>'], 'border-radius', '4px'),
-						A2(_user$project$Mfa_ops['=>'], 'left', 'center'),
-						A2(_user$project$Mfa_ops['=>'], 'top', 'center'),
-						A2(_user$project$Mfa_ops['=>'], 'color', 'white')
-					]))
-			]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				A2(
-				_elm_lang$html$Html$img,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$style(
-						_elm_lang$core$Native_List.fromArray(
-							[
-								A2(_user$project$Mfa_ops['=>'], 'width', '100%')
-							])),
-						_elm_lang$html$Html_Attributes$src('http://weknowyourdreams.com/images/sad/sad-07.jpg')
 					]),
 				_elm_lang$core$Native_List.fromArray(
 					[]))
@@ -10880,6 +10623,31 @@ var _user$project$Mfa$page_checkout = function (model) {
 					]))
 			]));
 };
+var _user$project$Mfa$newview = function (model) {
+	var _p3 = model.status;
+	switch (_p3.ctor) {
+		case 'None':
+			return _user$project$Mfa$page_checkout(model);
+		case 'Waiting':
+			return _user$project$Mfa$page_waiting(model);
+		default:
+			return A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$i,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('fa fa-spinner fa-spin')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[]))
+					]));
+	}
+};
 var _user$project$Mfa$ReceiveChatMessage = function (a) {
 	return {ctor: 'ReceiveChatMessage', _0: a};
 };
@@ -10891,12 +10659,12 @@ var _user$project$Mfa$subscriptions = function (model) {
 };
 var _user$project$Mfa$update = F2(
 	function (msg, model) {
-		var _p3 = msg;
-		switch (_p3.ctor) {
+		var _p4 = msg;
+		switch (_p4.ctor) {
 			case 'PhoenixMsg':
-				var _p4 = A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$update, _p3._0, model.phxSocket);
-				var phxSocket = _p4._0;
-				var phxCmd = _p4._1;
+				var _p5 = A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$update, _p4._0, model.phxSocket);
+				var phxSocket = _p5._0;
+				var phxCmd = _p5._1;
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
@@ -10923,9 +10691,9 @@ var _user$project$Mfa$update = F2(
 					_fbonetti$elm_phoenix_socket$Phoenix_Push$withPayload,
 					payload,
 					A2(_fbonetti$elm_phoenix_socket$Phoenix_Push$init, 'new:msg', 'rooms:lobby'));
-				var _p5 = A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$push, push$, model.phxSocket);
-				var phxSocket = _p5._0;
-				var phxCmd = _p5._1;
+				var _p6 = A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$push, push$, model.phxSocket);
+				var phxSocket = _p6._0;
+				var phxCmd = _p6._1;
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
@@ -10938,13 +10706,13 @@ var _user$project$Mfa$update = F2(
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{newMessage: _p3._0}),
+						{newMessage: _p4._0}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'ReceiveChatMessage':
-				var _p6 = A2(_elm_lang$core$Json_Decode$decodeValue, _user$project$Mfa$chatMessageDecoder, _p3._0);
-				if (_p6.ctor === 'Ok') {
-					var _p7 = _p6._0;
+				var _p7 = A2(_elm_lang$core$Json_Decode$decodeValue, _user$project$Mfa$chatMessageDecoder, _p4._0);
+				if (_p7.ctor === 'Ok') {
+					var _p8 = _p7._0;
 					return {
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
@@ -10954,8 +10722,8 @@ var _user$project$Mfa$update = F2(
 									_elm_lang$core$List_ops['::'],
 									A2(
 										_elm_lang$core$Basics_ops['++'],
-										_p7.user,
-										A2(_elm_lang$core$Basics_ops['++'], ': ', _p7.body)),
+										_p8.user,
+										A2(_elm_lang$core$Basics_ops['++'], ': ', _p8.body)),
 									model.messages)
 							}),
 						_1: _elm_lang$core$Platform_Cmd$none
@@ -10976,9 +10744,9 @@ var _user$project$Mfa$update = F2(
 							_fbonetti$elm_phoenix_socket$Phoenix_Channel$withPayload,
 							_user$project$Mfa$userParams,
 							_fbonetti$elm_phoenix_socket$Phoenix_Channel$init('rooms:lobby'))));
-				var _p8 = A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$join, channel, model.phxSocket);
-				var phxSocket = _p8._0;
-				var phxCmd = _p8._1;
+				var _p9 = A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$join, channel, model.phxSocket);
+				var phxSocket = _p9._0;
+				var phxCmd = _p9._1;
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
@@ -10989,14 +10757,14 @@ var _user$project$Mfa$update = F2(
 					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Mfa$PhoenixMsg, phxCmd)
 				};
 			case 'LeaveChannel':
-				var _p9 = A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$leave, 'rooms:lobby', model.phxSocket);
-				var phxSocket = _p9._0;
-				var phxCmd = _p9._1;
+				var _p10 = A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$leave, 'rooms:lobby', model.phxSocket);
+				var phxSocket = _p10._0;
+				var phxCmd = _p10._1;
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{phxSocket: phxSocket, status: _user$project$Mfa$None, ping: 0}),
+						{phxSocket: phxSocket}),
 					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Mfa$PhoenixMsg, phxCmd)
 				};
 			case 'ShowJoinedMessage':
@@ -11007,7 +10775,7 @@ var _user$project$Mfa$update = F2(
 						{
 							messages: A2(
 								_elm_lang$core$List_ops['::'],
-								A2(_elm_lang$core$Basics_ops['++'], 'Joined channel ', _p3._0),
+								A2(_elm_lang$core$Basics_ops['++'], 'Joined channel ', _p4._0),
 								model.messages)
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
@@ -11020,7 +10788,7 @@ var _user$project$Mfa$update = F2(
 						{
 							messages: A2(
 								_elm_lang$core$List_ops['::'],
-								A2(_elm_lang$core$Basics_ops['++'], 'Left channel ', _p3._0),
+								A2(_elm_lang$core$Basics_ops['++'], 'Left channel ', _p4._0),
 								model.messages)
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
@@ -11044,14 +10812,14 @@ var _user$project$Mfa$update = F2(
 					_fbonetti$elm_phoenix_socket$Phoenix_Push$withPayload,
 					payload,
 					A2(_fbonetti$elm_phoenix_socket$Phoenix_Push$init, 'new:msg', 'rooms:lobby'));
-				var _p10 = A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$push, push$, model.phxSocket);
-				var phxSocket = _p10._0;
-				var phxCmd = _p10._1;
+				var _p11 = A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$push, push$, model.phxSocket);
+				var phxSocket = _p11._0;
+				var phxCmd = _p11._1;
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{newMessage: '', phxSocket: phxSocket, ping: 0}),
+						{newMessage: '', phxSocket: phxSocket}),
 					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Mfa$PhoenixMsg, phxCmd)
 				};
 			case 'ReceiveAccepted':
@@ -11079,26 +10847,20 @@ var _user$project$Mfa$update = F2(
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'Ping':
-				var _p11 = A2(_elm_lang$core$Json_Decode$decodeValue, _user$project$Mfa$chatMessageDecoder, _p3._0);
-				if (_p11.ctor === 'Ok') {
+				var _p12 = A2(_elm_lang$core$Json_Decode$decodeValue, _user$project$Mfa$chatMessageDecoder, _p4._0);
+				if (_p12.ctor === 'Ok') {
 					return {
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
-							{ping: _p11._0.value, status: _user$project$Mfa$Waiting}),
+							{ping: _p12._0.value, status: _user$project$Mfa$Waiting}),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				} else {
 					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 				}
 			default:
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{ping: 0, status: _user$project$Mfa$None}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 		}
 	});
 var _user$project$Mfa$SetNewMessage = function (a) {
@@ -11189,9 +10951,9 @@ var _user$project$Mfa$view = function (model) {
 				_elm_lang$html$Html$ul,
 				_elm_lang$core$Native_List.fromArray(
 					[]),
-				function (_p12) {
+				function (_p13) {
 					return _elm_lang$core$List$reverse(
-						A2(_elm_lang$core$List$map, _user$project$Mfa$renderMessage, _p12));
+						A2(_elm_lang$core$List$map, _user$project$Mfa$renderMessage, _p13));
 				}(model.messages))
 			]));
 };
@@ -11235,98 +10997,11 @@ var _user$project$Mfa$initModel = A5(
 	0,
 	_user$project$Mfa$None);
 var _user$project$Mfa$init = {ctor: '_Tuple2', _0: _user$project$Mfa$initModel, _1: _elm_lang$core$Platform_Cmd$none};
-var _user$project$Mfa$Checkout = {ctor: 'Checkout'};
-var _user$project$Mfa$page_retry = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				A2(
-				_elm_lang$html$Html$img,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$src('http://www.theislandbath.com/assets/images/Icons/oops2.png')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[])),
-				A2(
-				_elm_lang$html$Html$br,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[])),
-				A2(
-				_elm_lang$html$Html$br,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[])),
-				A2(
-				_elm_lang$html$Html$h3,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('It seems that you didn\'t accept in time... should we retry ?')
-					])),
-				A5(
-				_JeremyBellows$elm_bootstrapify$Bootstrap_Buttons$btn,
-				_JeremyBellows$elm_bootstrapify$Bootstrap_Buttons$BtnSuccess,
-				_elm_lang$core$Native_List.fromArray(
-					[_JeremyBellows$elm_bootstrapify$Bootstrap_Buttons$BtnBlock]),
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Events$onClick(_user$project$Mfa$Checkout)
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('Yes')
-					])),
-				A5(
-				_JeremyBellows$elm_bootstrapify$Bootstrap_Buttons$btn,
-				_JeremyBellows$elm_bootstrapify$Bootstrap_Buttons$BtnDanger,
-				_elm_lang$core$Native_List.fromArray(
-					[_JeremyBellows$elm_bootstrapify$Bootstrap_Buttons$BtnBlock]),
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Events$onClick(_user$project$Mfa$LeaveChannel)
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('No')
-					]))
-			]));
-};
-var _user$project$Mfa$newview = function (model) {
-	var _p13 = model.status;
-	switch (_p13.ctor) {
-		case 'None':
-			return _user$project$Mfa$layout(
-				_user$project$Mfa$page_checkout(model));
-		case 'Waiting':
-			return _user$project$Mfa$layout(
-				_user$project$Mfa$page_waiting(model));
-		case 'Accepted':
-			return _user$project$Mfa$layout(
-				_user$project$Mfa$page_accepted(model));
-		case 'Rejected':
-			return _user$project$Mfa$layout(
-				_user$project$Mfa$page_rejected(model));
-		default:
-			return _user$project$Mfa$layout(
-				_user$project$Mfa$page_retry(model));
-	}
-};
 var _user$project$Mfa$main = {
 	main: _elm_lang$html$Html_App$program(
 		{init: _user$project$Mfa$init, update: _user$project$Mfa$update, view: _user$project$Mfa$newview, subscriptions: _user$project$Mfa$subscriptions})
 };
+var _user$project$Mfa$Checkout = {ctor: 'Checkout'};
 
 var Elm = {};
 Elm['Mfa'] = Elm['Mfa'] || {};
