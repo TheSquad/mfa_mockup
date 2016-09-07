@@ -11364,7 +11364,7 @@ var _user$project$Mfa$page_rejected = function (model) {
 					[]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html$text('It seems that you didn\'t accept in time... should we retry ?')
+						_elm_lang$html$Html$text('You didn\'t accept the purchase... should we retry ?')
 					])),
 				A2(
 				_elm_lang$html$Html$br,

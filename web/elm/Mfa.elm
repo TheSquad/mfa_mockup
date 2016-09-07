@@ -395,7 +395,7 @@ page_rejected model =
                ,"top" => "center"]
         ][ text "Your purchase has been rejected !" ]
      ,br [][]
-     ,h3 [] [text "It seems that you didn't accept in time... should we retry ?"]
+     ,h3 [] [text "You didn't accept the purchase... should we retry ?"]
      ,br [][]
      ,br [][]
      ,Btn.btn
